@@ -15,6 +15,7 @@
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
+          <factory-entry name="PP_3_1_4_Fetch-API" value="01cf7205-923b-4142-b3da-666512afd197" />
           <factory-entry name="entityManagerFactory" />
         </datasource-mapping>
         <naming-strategy-map />

@@ -89,7 +89,7 @@ public class AdminRestController {
     /***
      * Сохранить изменённого пользователя
      */
-    @PutMapping("/{id}")
+    @PutMapping()
     public ResponseEntity<String> editUser(@RequestBody User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.createOrUpdate(user);

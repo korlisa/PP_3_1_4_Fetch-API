@@ -39,8 +39,8 @@ async function editUser(modal, id) {
                 <div class="form-group">
                      <label for="rolesEdit" class="com-form-label">Role:</label>
                         <select multiple id="rolesEdit" class="form-control select" size="2" required="required">
-                             <option selected="selected" value="ROLE_USER">USER</option>
                              <option value="ROLE_ADMIN">ADMIN</option>
+                             <option selected="selected" value="ROLE_USER">USER</option>
                         </select>
                 </div>
             </form>

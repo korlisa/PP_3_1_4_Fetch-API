@@ -82,7 +82,7 @@ const userFetch = {
 }
 
 async function getUsers() {
-    const table = document.querySelector('#tb tbody');
+    const table = document.querySelector('#usersTable tbody');
     await userFetch.findAllUsers()
         .then(res => res.json())
         .then(users => {
@@ -110,7 +110,7 @@ async function getUsers() {
             table.innerHTML = temp;
         })
 
-    $("#tb").find('button').on('click', (event) => {
+    $("#usersTable").find('button').on('click', (event) => {
         let defaultModal = $('#defaultModal');
 
         let targetButton = $(event.target);
