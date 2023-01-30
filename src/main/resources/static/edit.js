@@ -18,23 +18,23 @@ async function editUser(modal, id) {
                </div>
                 <div class="form-group">
                     <label for="firstName" class="com-form-label">First Name</label>
-                    <input type="text" class="form-control" id="firstName" value="${user.firstName}">
+                    <input type="text" class="form-control" id="firstName" value="${user.firstName}" required>
                 </div>
                 <div class="form-group">
                     <label for="lastName" class="com-form-label">Last Name</label>
-                    <input type="text" class="form-control" id="lastName" value="${user.lastName}">
+                    <input type="text" class="form-control" id="lastName" value="${user.lastName}" required>
                 </div>
                 <div class="form-group">
                     <label for="age" class="com-form-label">Age</label>
-                    <input type="text" class="form-control" id="age" value="${user.age}">
+                    <input type="text" class="form-control" id="age" value="${user.age}" required>
                 </div>
                 <div class="form-group">
                     <label for="username" class="col-form-label">Email</label>
-                    <input type="text" class="form-control username" id="username" value="${user.username}">
+                    <input type="text" class="form-control username" id="username" value="${user.username}" required>
                </div>
                <div class="form-group">
                     <label for="password" class="com-form-label">Password</label>
-                    <input type="password" class="form-control" id="password" value="${user.password}">
+                    <input type="password" class="form-control" id="password" value="${user.password}" required>
                 </div>
                 <div class="form-group">
                      <label for="rolesEdit" class="com-form-label">Role:</label>
@@ -74,7 +74,8 @@ async function editUser(modal, id) {
             username: username,
             roles: checkedRoles()
         }
-        const response = await userFetch.updateUser(data, id);
+
+        const response = await userFetch.updateUser(data, id) ;
 
         if (response.ok) {
             await getUsers();

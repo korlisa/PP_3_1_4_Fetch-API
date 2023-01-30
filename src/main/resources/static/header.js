@@ -5,12 +5,14 @@ let roleList = [
 
 $(async function () {
     await infoUser();
-    await userTable();
     await getUsers();
+    await usersTable();
     await getNewUserForm();
     await getDefaultModal();
     await createUser();
+
 })
+
 // навбар
 async function infoUser() {
     let temp = '';
@@ -38,7 +40,7 @@ async function infoUser() {
     info.innerHTML = temp;
 }
 
-async function userTable() {
+async function usersTable() {
     let temp = '';
     const table = document.querySelector("#userTable tbody")
     await userFetch.findUserByUsername()

@@ -23,9 +23,12 @@ async function createUser() {
             username: username.value,
             roles: checkedRoles()
         }
-        //вставляем в ранне объявленную константу полученные из формы значения
-        //
+
         await userFetch.addNewUser(data);
+
         await getUsers();
+
     })
+
+
 }
