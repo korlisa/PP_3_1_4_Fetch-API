@@ -53,7 +53,7 @@ async function usersTable() {
                     <td>${user.lastName}</td>
                     <td>${user.age}</td>
                     <td>${user.username}</td>
-                    <td>${user.authorities.map(e => " " + e.authority.substring(5))}</td>
+                    <td>${user.roles.map(e => " " + e.name.substring(5))}</td>
                 </tr>
                `;
         })
@@ -97,7 +97,7 @@ async function getUsers() {
                     <td>${user.lastName}</td>
                     <td>${user.age}</td>
                     <td>${user.username}</td>
-                    <td>${user.authorities.map(e => " " + e.authority.substring(5))}</td>
+                    <td>${user.roles.map(e => " " + e.name.substring(5))}</td>
                     <td>
                         <button type="button" data-userid="${user.id}" data-action="edit" class="btn btn-info"
                             className data-toggle="modal" data-target="#editModal">Edit</button>

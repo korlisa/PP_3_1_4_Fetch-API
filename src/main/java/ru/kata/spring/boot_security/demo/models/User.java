@@ -1,6 +1,8 @@
 package ru.kata.spring.boot_security.demo.models;
 
 import lombok.Data;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -8,6 +10,7 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
+
 @Data
 @Table(name = "users")
 public class User implements UserDetails {
@@ -25,10 +28,11 @@ public class User implements UserDetails {
     @Transient
     private String confirm;
 
-    @ManyToMany (fetch = FetchType.EAGER)
+    @ManyToMany (fetch = FetchType.LAZY)
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @Fetch(FetchMode.JOIN)
     private Collection<Role> roles;
 
     @Override

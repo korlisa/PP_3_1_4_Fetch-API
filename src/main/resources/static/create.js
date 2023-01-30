@@ -1,34 +1,33 @@
-async function createUser() {
-    $('#newUserButton').on('click', async () =>{
-        const firstName = document.getElementById('newUserFirstName')
-        const lastName = document.getElementById('newUserLastName')
-        const age = document.getElementById('newUserAge')
-        const username = document.getElementById('newUserUsername')
-        const password = document.getElementById('newUserPassword')
-        let checkedRoles = () => {
-            let array = []
-            let options = document.getElementById('newUserRoles').options
-            for (let i = 0; i < options.length; i++) {
-                if (options[i].selected) {
-                    array.push(roleList[i])
-                }
-            }
-            return array;
-        }
-        let data = {
-            password: password.value,
-            firstName: firstName.value,
-            lastName: lastName.value,
-            age: age.value,
-            username: username.value,
-            roles: checkedRoles()
-        }
+const form = document.forms["formNewUser"];
+const applicantForm = document.getElementById('formNewUser')
+applicantForm.addEventListener('submit', createUser)
 
-        await userFetch.addNewUser(data);
-
-        await getUsers();
-
+async function createUser(event) {
+    // Просим форму не отправлять данные самостоятельно
+    event.preventDefault();
+    let checkedRoles = [];
+    for (let i = 0; i < form.roles.options.length; i++) {
+        if (form.roles.options[i].selected) checkedRoles.push({
+            id: form.roles.options[i].value,
+            name: "ROLE_" + form.roles.options[i].text
+        })
+    }
+    fetch("http://localhost:8080/api/admin", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            firstName: form.firstName.value,
+            lastName: form.lastName.value,
+            age: form.age.value,
+            username: form.username.value,
+            password: form.password.value,
+            roles: checkedRoles
+        })
+    }).then(() => {
+        form.reset();
+        getUsers();
+        $('#allUsersTable').click();
     })
-
-
 }
