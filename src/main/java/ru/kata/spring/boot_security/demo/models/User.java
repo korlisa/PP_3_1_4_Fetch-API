@@ -1,8 +1,6 @@
 package ru.kata.spring.boot_security.demo.models;
 
 import lombok.Data;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -10,7 +8,8 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-
+@NamedEntityGraph(name = "User.role",
+        attributeNodes = @NamedAttributeNode("roles"))
 @Data
 @Table(name = "users")
 public class User implements UserDetails {
@@ -24,19 +23,18 @@ public class User implements UserDetails {
     private String username;
     private String password;
 
-//    private String email;
+
     @Transient
     private String confirm;
 
-    @ManyToMany (fetch = FetchType.LAZY)
+    @ManyToMany
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    @Fetch(FetchMode.JOIN)
     private Collection<Role> roles;
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities()   {
+    public Collection<? extends GrantedAuthority> getAuthorities() {
         return getRoles();
     }
 
